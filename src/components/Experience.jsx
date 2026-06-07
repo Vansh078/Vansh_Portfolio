@@ -27,7 +27,6 @@ export default function Experience() {
     <section id="experience" className="experience-section">
       <div className="container">
         <div className="section-title-wrapper">
-          <div className="section-tag">Timeline // Career</div>
           <h2 className="section-title">Work <span>Experience</span></h2>
         </div>
 
