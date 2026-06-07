@@ -94,7 +94,6 @@ export default function Skills() {
             </div>
 
             <div className="panel-footer font-mono">
-              <span className="text-muted">// System metrics loaded successfully.</span>
             </div>
           </div>
         </div>

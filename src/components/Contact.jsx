@@ -199,7 +199,7 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="contact-form glass-card">
                 <div className="form-header font-mono">
                   <Terminal size={14} className="text-green" />
-                  <span>Send Message Client (EmailJS)</span>
+                  <span>Send Message </span>
                 </div>
 
                 {apiState === 'error' && (
