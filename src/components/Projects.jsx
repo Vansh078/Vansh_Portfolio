@@ -22,7 +22,7 @@ const PROJECTS_DATA = [
   {
     title: 'Simple Email Service (SES)',
     subtitle: 'Transactional Email microservice',
-    desc: 'A robust transactional email microservice. Built RESTful API endpoints for sending emails and managing newsletter templates. Utilizes AWS SES for delivery. Integrated with PostgreSQL for template storage and analytics tracking.',
+    desc: 'A robust transactional email microservice. Built RESTful API endpoints for sending emails. Utilizes AWS SES for delivery. Integrated with PostgreSQL for template storage and analytics tracking.',
     tech: ['Spring Boot', 'AWS SES', 'Postgresql'],
     metrics: 'API Latency: 45ms',
     github: 'https://github.com/Vansh078/email-service.git',
