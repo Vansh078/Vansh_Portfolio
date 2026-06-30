@@ -280,6 +280,9 @@ export default function Contact() {
 
         <footer className="footer font-mono text-xs text-muted">
           <div>© {new Date().getFullYear()} Vansh Agrawal. All systems operational.</div>
+          <div>
+            <a href="#/privacy" className="footer-link">Privacy Policy</a>
+          </div>
           <div>Compiled with React, Vite & pure CSS.</div>
         </footer>
       </div>
