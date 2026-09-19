@@ -102,9 +102,13 @@ export default function Contact() {
         serviceId,
         templateId,
         {
+          name: formData.name.trim(),
           from_name: formData.name.trim(),
+          email: formData.email.trim(),
           from_email: formData.email.trim(),
-          message: formData.message.trim()
+          reply_to: formData.email.trim(),
+          message: formData.message.trim(),
+          to_name: 'Vansh Agrawal'
         },
         publicKey
       );
@@ -119,7 +123,12 @@ export default function Contact() {
     } catch (err) {
       console.error('[EmailJS Client] Transmission failed:', err);
       setApiState('error');
-      setErrorMessage(err.text || err.message || 'Failed to dispatch email via EmailJS.');
+      const rawError = err?.text || err?.message || 'Failed to dispatch email via EmailJS.';
+      if (typeof rawError === 'string' && rawError.toLowerCase().includes('invalid grant')) {
+        setErrorMessage('Gmail authentication expired: Please reconnect your Gmail account in the EmailJS dashboard.');
+      } else {
+        setErrorMessage(rawError);
+      }
     }
   };
 
@@ -203,11 +212,22 @@ export default function Contact() {
                 </div>
 
                 {apiState === 'error' && (
-                  <div className="font-mono text-xs text-red glass-card" style={{ borderColor: 'rgba(239, 68, 68, 0.3)', background: 'rgba(239, 68, 68, 0.05)', padding: '1rem', display: 'flex', gap: '0.75rem', alignItems: 'flex-start', borderRadius: '4px' }}>
-                    <AlertCircle size={16} style={{ flexShrink: 0, marginTop: '2px' }} />
-                    <div>
-                      <div style={{ fontWeight: 'bold', marginBottom: '0.25rem' }}>Transmission Error:</div>
-                      <div>{errorMessage}</div>
+                  <div className="font-mono text-xs text-red glass-card" style={{ borderColor: 'rgba(239, 68, 68, 0.3)', background: 'rgba(239, 68, 68, 0.05)', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', borderRadius: '4px' }}>
+                    <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                      <AlertCircle size={16} style={{ flexShrink: 0, marginTop: '2px' }} />
+                      <div>
+                        <div style={{ fontWeight: 'bold', marginBottom: '0.25rem' }}>Transmission Error:</div>
+                        <div>{errorMessage}</div>
+                      </div>
+                    </div>
+                    <div style={{ borderTop: '1px solid rgba(239, 68, 68, 0.2)', paddingTop: '0.5rem' }}>
+                      <a
+                        href={`mailto:vanshagrawal068@gmail.com?subject=${encodeURIComponent(`Message from ${formData.name || 'Portfolio Visitor'}`)}&body=${encodeURIComponent(formData.message || '')}`}
+                        className="text-blue underline-link"
+                        style={{ fontSize: '0.8rem', display: 'inline-block' }}
+                      >
+                        → Or click here to send directly via your mail client
+                      </a>
                     </div>
                   </div>
                 )}
